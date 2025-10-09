@@ -1,0 +1,23 @@
+{
+  "name": "webowe4c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriel-teb/webowe4c.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabriel-teb/webowe4c/issues"
+  },
+  "homepage": "https://github.com/gabriel-teb/webowe4c#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
