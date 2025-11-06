@@ -1,14 +1,10 @@
 const express = require('express');
-
+const users = require("./routes/user")
 const app = express();
 const PORT = 8080;
+app.use(express.json())
 
-app.get("/", (req, res)=>{
-    res.send("Mój pierwszy program");
-})
-app.get("/pierwsza", (req, res)=>{
-    res.send("Mój pierwszy program i pierwsza strona");
-})
+app.use("/users", users)
 
 app.listen(PORT, (error)=>{
     if(!error){
