@@ -17,7 +17,7 @@ exports.getUsers = (req, res)=>{
 }
 
 exports.putUser = (req,res)=>{
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);
     const user = users.find(u=> u.id=== userId);
 
     if(!user) return res.json({message: "Nie ma takiego użytkownika"})
@@ -30,7 +30,7 @@ exports.putUser = (req,res)=>{
 }
 
 exports.deleteUser = (req, res)=>{
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);
     users.filter(u=> u.id !== userId);
     res.json(users)
 }
