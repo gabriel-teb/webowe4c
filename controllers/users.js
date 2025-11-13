@@ -1,30 +1,60 @@
 const User = require("../models/user")
 
 
-exports.getUsers = async (req, res)=>{
-    try{
+exports.getUsers = async (req, res) => {
+    try {
         const user = await User.findAll();
-        res.json(user) 
-    }catch(error){
-        res.status(500).json({message: "Błąd serwera", error})
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Błąd serwera", error })
     }
 }
 
-exports.putUser = (req,res)=>{
+exports.getSingleUser = async (req, res) => {
     const userId = parseInt(req.params.id);
-    const user = users.find(u=> u.id=== userId);
 
-    if(!user) return res.json({message: "Nie ma takiego użytkownika"})
-
-    user.first_name = req.body.first;
-    user.last_name = req.body.last;
-    user.email = req.body.email;
-
-    res.json(user)
+    try {
+        const user = await User.findByPk(userId)
+        if(!user) return res.status(404).json({message: "Użytkownik nieodnaleziony"})
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Błąd serwera", error })
+    }
 }
 
-exports.deleteUser = (req, res)=>{
+exports.createUser = async (req, res) => {
+    try {
+        const { name, email } = req.body
+        const newUser = await User.create({ name, email })
+
+        res.status(201).json(newUser)
+    } catch (error) {
+        res.status(500).json({ message: "Błąd serwera", error })
+    }
+}
+
+exports.editUser = async (req, res) => {
     const userId = parseInt(req.params.id);
-    users.filter(u=> u.id !== userId);
-    res.json(users)
+    try {
+        const { name, email } = req.body
+        const user = await User.findByPk(userId)
+        if(!user) return res.status(404).json({message: "Użytkownik nieodnaleziony"})
+
+       await user.update({name, email})
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Błąd serwera", error })
+    }
+}
+
+exports.deleteUser = async (req, res) => {
+       const userId = parseInt(req.params.id);
+    try {
+        const user = await User.findByPk(userId)
+        if(!user) return res.status(404).json({message: "Użytkownik nieodnaleziony"})
+        await user.destroy()
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: "Błąd serwera", error })
+    }
 }
