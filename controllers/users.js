@@ -1,19 +1,13 @@
+const User = require("../models/user")
 
-let users = [
-            {"id":1,"first_name":"Constantine","last_name":"Lamartine","email":"clamartine0@yale.edu"},
-            {"id":2,"first_name":"Iago","last_name":"Lace","email":"ilace1@fotki.com"},
-            {"id":3,"first_name":"Hoyt","last_name":"Tiley","email":"htiley2@marriott.com"},
-            {"id":4,"first_name":"Monica","last_name":"O\'Crowley","email":"mocrowley3@etsy.com"},
-            {"id":5,"first_name":"Laina","last_name":"Jime","email":"ljime4@wunderground.com"},
-            {"id":6,"first_name":"Normy","last_name":"Seathwright","email":"nseathwright5@geocities.com"},
-            {"id":7,"first_name":"Willie","last_name":"Carryer","email":"wcarryer6@furl.net"},
-            {"id":8,"first_name":"Kean","last_name":"Washbrook","email":"kwashbrook7@ox.ac.uk"},
-            {"id":9,"first_name":"Georgeanne","last_name":"McCallion","email":"gmccallion8@fema.gov"},
-            {"id":10,"first_name":"George","last_name":"Cornock","email":"gcornock9@prnewswire.com"}
-        ]
 
-exports.getUsers = (req, res)=>{
-    res.json(users);
+exports.getUsers = async (req, res)=>{
+    try{
+        const user = await User.findAll();
+        res.json(user) 
+    }catch(error){
+        res.status(500).json({message: "Błąd serwera", error})
+    }
 }
 
 exports.putUser = (req,res)=>{
