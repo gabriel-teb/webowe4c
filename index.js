@@ -3,10 +3,13 @@ const users = require("./routes/user")
 const cars = require("./routes/car")
 const app = express();
 const PORT = 8080;
+const sequelize = require("./database")
 app.use(express.json())
 
 app.use("/users", users)
 app.use("/cars", cars)
+
+sequelize.sync({alter: true})
 
 app.listen(PORT, (error)=>{
     if(!error){
