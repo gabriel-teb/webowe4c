@@ -81,4 +81,6 @@ const SilnikSzczegoly = db.define("SilnikSzczegoly", {
   },
 });
 
-module.exports = Samochod
+Szczegoly.belongsTo(SilnikSzczegoly, {foreignKey: "silnikId"})
+
+module.exports = {Samochod, Szczegoly, SilnikSzczegoly}

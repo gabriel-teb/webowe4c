@@ -55,4 +55,4 @@ const Adres = db.define("Adres", {
   },
 });
 
-module.exports = Uzytkownik;
+module.exports = {Uzytkownik, Adres};
